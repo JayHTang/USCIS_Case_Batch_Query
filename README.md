@@ -27,7 +27,7 @@ WAC-***20***-123-45678
 The next two digits represent the fiscal year of the case received. A fiscal year begins on Oct 1 and ends on Sep 30. In this example the case was received in 2020 fiscal year.
 
 ### Third set of three digits - Computer Workday
-WAC-20-***123**-45678
+WAC-20-***123***-45678
 
 These three digits represent the computer workday on which the receipt was processed and the fee was taken. A computer workday is essentially the same thing as a regular workday, which excludes weekends and most holidays. In this example the case was processed on the 123rd workday of 2020 fiscal year.
 
