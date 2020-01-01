@@ -32,6 +32,7 @@ WAC-20-***123**-45678
 These three digits represent the computer workday on which the receipt was processed and the fee was taken. A computer workday is essentially the same thing as a regular workday, which excludes weekends and most holidays. In this example the case was processed on the 123rd workday of 2020 fiscal year.
 
 ### Last set of five digits - Case Number
+WAC-20-123-***45678***
 Finally, the last five digits are used to identify uniquely the petition filed. It has been observed that these are sequential numbers which are issued as cases are being processed at the intake facility. Cases filed together are often given sequential (or close to sequential) numbers for the last five digits (and overall).
 
 ## What you can do with this tool
