@@ -17,9 +17,9 @@ namespace USCIS_Case_Batch_Query
             InitializeComponent();
             casesDataGrid.ItemsSource = this.caseStatuses;
             ReceiptNumber.Text = ConfigurationManager.AppSettings["DefaultReceiptNumber"];
+            NextCases.Text = ConfigurationManager.AppSettings["DefaultNextCases"];
             NextCasesRange.Content = $"Range: 0 - {RANGE}";
             logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-            logger.Info("test");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
