@@ -18,8 +18,8 @@ namespace USCIS_Case_Batch_Query
             casesDataGrid.ItemsSource = this.caseStatuses;
             ReceiptNumber.Text = ConfigurationManager.AppSettings["DefaultReceiptNumber"];
             NextCases.Text = ConfigurationManager.AppSettings["DefaultNextCases"];
-            NextCasesRange.Content = $"Range: 0 - {RANGE}";
             logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+            NextCasesRange.Content = $"Range: 0 - {RANGE}";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -135,9 +135,10 @@ namespace USCIS_Case_Batch_Query
                 e.Column.Header = "Case Type";
         }
 
+        public static readonly int RANGE = Int32.Parse(ConfigurationManager.AppSettings["MaxNextCases"].Trim());
+
         private List<CaseStatus> caseStatuses = new List<CaseStatus>();
         private static readonly HttpClient client = new HttpClient();
-        public static readonly int RANGE = 10;
         private readonly NLog.Logger logger;
     }
 }
