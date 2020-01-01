@@ -1,0 +1,64 @@
+﻿<Window x:Class="USCIS_Case_Batch_Query.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:USCIS_Case_Batch_Query"
+        mc:Ignorable="d"
+        Title="USCIS Case Batch Query" Height="720" Width="1280">
+    <Window.Resources>
+        <local:SearchQuery x:Key="Ods"/>
+        <ControlTemplate x:Key="validationTemplate">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="20">!</TextBlock>
+                <AdornedElementPlaceholder/>
+            </DockPanel>
+        </ControlTemplate>
+        <Style x:Key="TextBoxInError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="RedBackgroundOnErrorStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxInError}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="Background" Value="IndianRed" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Label Content="USCIS Receipt Number" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox x:Name="ReceiptNumber" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource RedBackgroundOnErrorStyle}" HorizontalAlignment="Left" Margin="10,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="28.62" FontSize="14">
+            <TextBox.Text>
+                <Binding Path="ReceiptNumber" Source="{StaticResource Ods}" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:ReceiptNumberRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label Content="Example: WAC1234567890" HorizontalAlignment="Left" Margin="12,73,0,0" VerticalAlignment="Top" FontSize="10" Opacity="0.7"/>
+        <Label Content="Next Cases" HorizontalAlignment="Left" Margin="10,101,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox x:Name="NextCases" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource RedBackgroundOnErrorStyle}" HorizontalAlignment="Left" Margin="10,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="28" FontSize="14">
+            <TextBox.Text>
+                <Binding Path="NextCases" Source="{StaticResource Ods}" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:NextCasesRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label x:Name="NextCasesRange" Content="" HorizontalAlignment="Left" Margin="12,163,0,0" VerticalAlignment="Top" FontSize="10" Opacity="0.7"/>
+        <Button Content="Start" HorizontalAlignment="Left" Margin="10,191,0,0" VerticalAlignment="Top" FontSize="14" Width="50" Click="Button_Click"/>
+        <Label Content="Status:" HorizontalAlignment="Left" Margin="10,222,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label x:Name="Status" Content="Ready" HorizontalAlignment="Left" Margin="60,222,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+        <Label x:Name="LastUpdatedLabel" Content="Last updated:" HorizontalAlignment="Left" Margin="10,256,0,0" VerticalAlignment="Top" FontSize="14" Visibility="Hidden"/>
+        <Label x:Name="LastUpdated" Content="" HorizontalAlignment="Left" Margin="10,285,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <DataGrid Margin="166,10,0,0" Name="casesDataGrid" FontSize="14" />
+    </Grid>
+
+</Window>
+    
