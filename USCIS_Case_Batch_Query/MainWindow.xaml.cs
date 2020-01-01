@@ -1,5 +1,4 @@
-﻿using log4net;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -19,6 +18,8 @@ namespace USCIS_Case_Batch_Query
             casesDataGrid.ItemsSource = this.caseStatuses;
             ReceiptNumber.Text = ConfigurationManager.AppSettings["DefaultReceiptNumber"];
             NextCasesRange.Content = $"Range: 0 - {RANGE}";
+            logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+            logger.Info("test");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -106,9 +107,9 @@ namespace USCIS_Case_Batch_Query
             }
             catch (AggregateException ae)
             {
-                log.Error("One or more exceptions occurred: ");
+                logger.Error("One or more exceptions occurred: ");
                 foreach (var ex in ae.Flatten().InnerExceptions)
-                    log.Error($"   {ex.Message}");
+                    logger.Error($"   {ex.Message}");
             }
             this.caseStatuses.Sort(new CaseComparer());
         }
@@ -137,6 +138,6 @@ namespace USCIS_Case_Batch_Query
         private List<CaseStatus> caseStatuses = new List<CaseStatus>();
         private static readonly HttpClient client = new HttpClient();
         public static readonly int RANGE = 10;
-        private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly NLog.Logger logger;
     }
 }
