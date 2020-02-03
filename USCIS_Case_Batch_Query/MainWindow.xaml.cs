@@ -46,6 +46,8 @@ namespace USCIS_Case_Batch_Query
 
         private async Task GetCaseStatusAsync(string receiptNumber)
         {
+            HttpClient client = new HttpClient();
+
             // get response
             HttpResponseMessage response = await client.GetAsync($"https://egov.uscis.gov/casestatus/mycasestatus.do?appReceiptNum={receiptNumber}");
             string content = await response.Content.ReadAsStringAsync();
@@ -138,7 +140,7 @@ namespace USCIS_Case_Batch_Query
         public static readonly int RANGE = Int32.Parse(ConfigurationManager.AppSettings["MaxNextCases"].Trim());
 
         private List<CaseStatus> caseStatuses = new List<CaseStatus>();
-        private static readonly HttpClient client = new HttpClient();
+        //private static readonly HttpClient client = new HttpClient();
         private readonly NLog.Logger logger;
     }
 }
