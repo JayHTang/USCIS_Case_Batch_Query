@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
+using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -95,17 +96,25 @@ namespace USCIS_Case_Batch_Query
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
             JobParams jobParams = (JobParams)e.Argument;
-            int count = jobParams.NextCases + 1;
-            Task[] tasks = new Task[count];
-            string prefix = jobParams.ReceiptNumber.Substring(0, 3);
-            long n = Int64.Parse(jobParams.ReceiptNumber.Substring(3));
-            for (int i = 0; i < count; ++i)
+            string prefix = jobParams.ReceiptNumber[..3];
+            string[] receiptNumbers = jobParams.ReceiptNumber.Split(';', StringSplitOptions.RemoveEmptyEntries);
+
+            int numCases = jobParams.NextCases + 1;
+            List<Task> tasks = new List<Task>();
+            foreach (string receiptNumber in receiptNumbers)
             {
-                tasks[i] = GetCaseStatusAsync($"{prefix}{n + i}");
+                if (receiptNumber.Length != 13)
+                    continue;
+                long n = long.Parse(receiptNumber[3..]);
+                for (int i = 0; i < numCases; i++)
+                {
+                    tasks.Add(GetCaseStatusAsync($"{prefix}{n + i}"));
+                }
             }
+
             try
             {
-                Task.WaitAll(tasks);
+                Task.WaitAll(tasks.Where(t=>t!=null).ToArray());
             }
             catch (AggregateException ae)
             {
@@ -113,6 +122,11 @@ namespace USCIS_Case_Batch_Query
                 foreach (var ex in ae.Flatten().InnerExceptions)
                     logger.Error($"   {ex.Message}");
             }
+            catch (ArgumentException ex)
+            {
+                logger.Error($"{ex.Message}");
+            }
+
             this.caseStatuses.Sort(new CaseComparer());
         }
 

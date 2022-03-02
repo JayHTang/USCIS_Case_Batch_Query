@@ -19,7 +19,7 @@ namespace USCIS_Case_Batch_Query
                 return new ValidationResult(false, "Illegal characters or " + e.Message);
             }
 
-            if(receiptNumber.Length != 13 || !Regex.Match(receiptNumber, @"^[a-zA-Z]{3}\d{10}$").Success)
+            if(!Regex.Match(receiptNumber, @"((?!=^|;)([a-zA-Z]{3}\d{10}))+").Success)
             {
                 return new ValidationResult(false, "Invalid receipt number");
             }

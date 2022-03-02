@@ -31,7 +31,7 @@
     </Window.Resources>
     <Grid>
         <Label Content="USCIS Receipt Number" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox x:Name="ReceiptNumber" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource RedBackgroundOnErrorStyle}" HorizontalAlignment="Left" Margin="10,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="28.62" FontSize="14">
+        <TextBox x:Name="ReceiptNumber" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource RedBackgroundOnErrorStyle}" HorizontalAlignment="Left" Margin="10,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="138" FontSize="14">
             <TextBox.Text>
                 <Binding Path="ReceiptNumber" Source="{StaticResource Ods}" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -40,9 +40,9 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <Label Content="Example: WAC1234567890" HorizontalAlignment="Left" Margin="12,73,0,0" VerticalAlignment="Top" FontSize="10" Opacity="0.7"/>
-        <Label Content="Next Cases" HorizontalAlignment="Left" Margin="10,101,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <TextBox x:Name="NextCases" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource RedBackgroundOnErrorStyle}" HorizontalAlignment="Left" Margin="10,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="28" FontSize="14">
+        <Label Content="Example: WAC1234567890" HorizontalAlignment="Left" Margin="12,182,0,0" VerticalAlignment="Top" FontSize="10" Opacity="0.7"/>
+        <Label Content="Next Cases" HorizontalAlignment="Left" Margin="10,210,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox x:Name="NextCases" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource RedBackgroundOnErrorStyle}" HorizontalAlignment="Left" Margin="10,244,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" Height="28" FontSize="14">
             <TextBox.Text>
                 <Binding Path="NextCases" Source="{StaticResource Ods}" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -51,12 +51,12 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <Label x:Name="NextCasesRange" Content="" HorizontalAlignment="Left" Margin="12,163,0,0" VerticalAlignment="Top" FontSize="10" Opacity="0.7"/>
-        <Button Content="Start" HorizontalAlignment="Left" Margin="10,191,0,0" VerticalAlignment="Top" FontSize="14" Width="50" Click="Button_Click"/>
-        <Label Content="Status:" HorizontalAlignment="Left" Margin="10,222,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Label x:Name="Status" Content="Ready" HorizontalAlignment="Left" Margin="60,222,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+        <Label x:Name="NextCasesRange" Content="" HorizontalAlignment="Left" Margin="12,272,0,0" VerticalAlignment="Top" FontSize="10" Opacity="0.7"/>
+        <Button Content="Start" HorizontalAlignment="Left" Margin="10,300,0,0" VerticalAlignment="Top" FontSize="14" Width="50" Click="Button_Click"/>
+        <Label Content="Status:" HorizontalAlignment="Left" Margin="10,331,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label x:Name="Status" Content="Ready" HorizontalAlignment="Left" Margin="60,331,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
         <Label x:Name="LastUpdatedLabel" Content="Last updated:" HorizontalAlignment="Left" Margin="10,256,0,0" VerticalAlignment="Top" FontSize="14" Visibility="Hidden"/>
-        <Label x:Name="LastUpdated" Content="" HorizontalAlignment="Left" Margin="10,285,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label x:Name="LastUpdated" Content="" HorizontalAlignment="Left" Margin="10,394,0,0" VerticalAlignment="Top" FontSize="14"/>
         <DataGrid Margin="166,10,0,0" Name="casesDataGrid" FontSize="14" />
     </Grid>
 
