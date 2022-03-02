@@ -98,7 +98,7 @@ namespace USCIS_Case_Batch_Query
             int count = jobParams.NextCases + 1;
             Task[] tasks = new Task[count];
             string prefix = jobParams.ReceiptNumber.Substring(0, 3);
-            int n = Int32.Parse(jobParams.ReceiptNumber.Substring(3));
+            long n = Int64.Parse(jobParams.ReceiptNumber.Substring(3));
             for (int i = 0; i < count; ++i)
             {
                 tasks[i] = GetCaseStatusAsync($"{prefix}{n + i}");
